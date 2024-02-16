@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 class ContactController extends Controller
 {
-    public function index(){}
+    public function index(){
+        $contacts = Contact::all();
+        return view('contacts/list',compact('contacts'));
+    }
     public function create(){
         return view('contacts/create');
     }
@@ -26,5 +29,15 @@ class ContactController extends Controller
         $contact->phone = $request->phone;
         $contact->location = $request->location;
         $contact->save();
+    
+        return redirect('/contacts')->with('msg','Record added');
+
+    }
+
+    public function destroy($id){
+        $contact = Contact::find($id);
+        $contact->delete();
+        return redirect('/contacts')->with('msg','Record Deleted');
+
     }
 }
