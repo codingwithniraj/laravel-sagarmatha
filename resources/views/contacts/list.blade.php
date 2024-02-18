@@ -21,7 +21,7 @@
             @method('DELETE')
             <input type="submit" value="Delete"> 
         </form>
-        Edit
+        <a href="/contacts/{{$contact->id}}/edit">Edit</a>
 
         <hr>
     @endforeach
